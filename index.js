@@ -1,16 +1,13 @@
 import express from "express"
-import dotenv from "dotenv"
+import { config } from "dotenv"
+import userRoute from "./routes/user.route.js"
 
-dotenv.config()
+config()
 
 const app = express();
 
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to the api world" })
-})
+app.use(express.json())
 
-app.get("/users", (req, res) => {
-    res.json({ users: [{ name: "subrat", age: 24 }, {name: "santosh", age:63},{ name: "soumya", age: 36 }, { name: "santosh", age: 23 }, { name: "manas", age: 52 }, { name: "pratap", age: 31 }] })
-})
+app.use("/api/users", userRoute)
 
 export default app
